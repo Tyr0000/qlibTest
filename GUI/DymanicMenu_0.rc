@@ -1,0 +1,507 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\DymanicMenu.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DymanicMenu.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_LOAD_DATA DIALOGEX 0, 0, 128, 72
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Load Data"
+FONT 12, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    RTEXT           "Number of Rows",IDC_STATIC,7,9,69,8
+    RTEXT           "Number of Columns",IDC_STATIC,9,24,67,8
+    RTEXT           "Data Length",IDC_STATIC,9,38,67,8
+    COMBOBOX        IDC_COMBO_DATA_LEN,80,36,40,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Load",IDC_BUTTON_LOAD,80,52,41,13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DLG_LOAD_DATA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 121
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 65
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DLG_LOAD_DATA DLGINIT
+BEGIN
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x2038, 0x6962, 0x0074, 
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x3631, 0x6962, 0x0074, 
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x3233, 0x6962, 0x0074, 
+    0
+END
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_2D             ICON                    "res\\icon_2D.ico"
+IDI_ICON_3D             ICON                    "res\\icon_3D.ico"
+IDI_ICON_P              ICON                    "res\\ico00001.ico"
+IDI_ICON_R              ICON                    "res\\icon1.ico"
+IDI_ICON_T              ICON                    "res\\icon_T.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_MAIN DIALOGEX 0, 0, 510, 284
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Menu Builder"
+FONT 10, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    CONTROL         "",IDC_TREE_MENU_BUILDER,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,5,17,75,115
+    PUSHBUTTON      "Add Sub Item",IDC_BUTTON_ADD_MENU_ITEM,7,175,75,14
+    PUSHBUTTON      "Delete Item",IDC_BUTTON_DEL_MENU_ITEM,7,190,75,14
+    CONTROL         "Paramers",IDC_RADIO_PARAMETER_DLG,"Button",BS_AUTORADIOBUTTON,96,20,46,10
+    CONTROL         "Table",IDC_RADIO_TBL,"Button",BS_AUTORADIOBUTTON,168,20,34,10
+    CONTROL         "Graph",IDC_RADIO_GRAPH,"Button",BS_AUTORADIOBUTTON,234,20,35,10
+    CONTROL         "2D Graph",IDC_RADIO_2D_GRAPH,"Button",BS_AUTORADIOBUTTON,297,20,45,10
+    CONTROL         "3D Graph",IDC_RADIO_3D_GRAPH,"Button",BS_AUTORADIOBUTTON,370,20,45,10
+    PUSHBUTTON      "Save Menu",IDC_BUTTON_SAVE_ITEMS,429,265,75,14,WS_DISABLED
+    PUSHBUTTON      "Load Menu",IDC_BUTTON_LOAD_MENU,7,250,75,14
+    GROUPBOX        " Menu Dialog Type ",IDC_STATIC,87,8,341,30
+    EDITTEXT        IDC_EDIT_MENU_ITEM_NAME,7,145,75,14,ES_AUTOHSCROLL
+    LTEXT           "Item Name",IDC_STATIC,7,135,64,8
+    CONTROL         "",IDC_TREE_MENU_TST,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS | WS_DISABLED | WS_BORDER | WS_HSCROLL | WS_TABSTOP,429,12,75,167
+    PUSHBUTTON      "Delete All Items",IDC_BUTTON_DEL_ALL_MENU_ITEMS,7,205,75,14
+    LTEXT           "Menu is not loaded",IDC_STATIC_MENU_NAME,7,7,77,8
+    CONTROL         "",IDC_STATIC_PLACEHOLDER_DLG,"Static",SS_WHITEFRAME,86,40,338,239
+    PUSHBUTTON      "Save Data",IDC_BUTTON_SAVE_DATA,7,235,75,14,WS_DISABLED
+    PUSHBUTTON      "Save",IDC_BUTTON_SAVE,7,220,75,14
+    PUSHBUTTON      "Load Data",IDC_BUTTON_LOAD_DATA,7,265,75,14,WS_DISABLED
+    PUSHBUTTON      "Add Root Item",IDC_BUTTON_ADD_MENU_ROOT_ITEM,7,160,75,14
+    PUSHBUTTON      "Import Item",IDC_BUTTON_IMPORT_ITEM,430,236,75,14
+    PUSHBUTTON      "Load Menu",IDC_BUTTON_LOAD_EXT_MENU,429,209,75,14
+    PUSHBUTTON      "Import Item Data",IDC_BUTTON_IMPORT_ITEM_DATA,430,250,75,14
+    PUSHBUTTON      "Export Item",IDC_BUTTON_EXPORT_ITEM,429,181,75,14
+    PUSHBUTTON      "Export Item Data",IDC_BUTTON_IMPORT_ITEM_DATA2,429,195,75,14
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,431,224,74,1
+END
+
+IDD_DLG_PARAMS_BUILDER DIALOGEX 0, 0, 303, 215
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 12, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    PUSHBUTTON      "Add Field",IDC_BUTTON_ADD_FIELD,150,194,46,14
+    PUSHBUTTON      "Delete Field",IDC_BUTTON_DEL_FIELD,102,194,46,14
+    PUSHBUTTON      "Move Up",IDC_BUTTON_MOVE_UP,55,194,46,14,WS_DISABLED
+    PUSHBUTTON      "Move Down",IDC_BUTTON_MOVE_DOWN,7,194,46,14,WS_DISABLED
+    CONTROL         "",IDC_LIST_FIELDS,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,20,288,171
+    LTEXT           "Parameter List",-1,8,7,64,8
+    PUSHBUTTON      "Preview",IDC_BUTTON_TEST,246,194,46,14
+    PUSHBUTTON      "Save",IDC_BUTTON_SAVE_DESCRIPTOR,198,194,46,14
+END
+
+IDD_DLG_GRAPH_1D_BUILDER DIALOGEX 0, 0, 466, 224
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 10, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    LTEXT           "Graph",IDC_STATIC,8,7,64,8
+    PUSHBUTTON      "Load",IDC_BUTTON_LOAD,84,192,45,14
+    CONTROL         "",IDC_STATIC_PLACEHOLDER_DLG,"Static",SS_WHITEFRAME,133,7,250,210
+    RTEXT           "Number of Points",IDC_STATIC,8,69,70,10
+    EDITTEXT        IDC_EDIT_NUM_OF_COLS,82,65,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_LIST_FIELDS,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,137,23,130,183
+    RTEXT           "Data Pointer Length",IDC_STATIC,9,22,69,10
+    COMBOBOX        IDC_COMBO_DATA_LEN,82,21,45,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,13,130,114,1
+    RTEXT           "Data Offset in File",IDC_STATIC,9,177,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET_IN_FILE,83,173,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "X Offset",IDC_STATIC,8,85,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET_X,82,81,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Save",IDC_BUTTON_SAVE_DESCRIPTOR,81,113,45,14
+    EDITTEXT        IDC_EDIT_MIN_VAL,81,33,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Min Value",IDC_STATIC,8,35,69,10
+    EDITTEXT        IDC_EDIT_MAX_VAL,81,49,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Max Value",IDC_STATIC,8,51,69,10
+    RTEXT           "Y Offset",IDC_STATIC,7,101,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET_Y,81,97,45,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_DLG_TBL DIALOGEX 0, 0, 464, 224
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 10, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    PUSHBUTTON      "Load",IDC_BUTTON_LOAD,82,180,45,14
+    CONTROL         "",IDC_LIST_DATA,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,133,7,324,210
+    LTEXT           "Data Table",IDC_STATIC,9,8,73,9
+    PUSHBUTTON      "Load from clipboard",IDC_BUTTON_LOAD_FROM_CLIPBOARD,82,196,45,20,BS_MULTILINE
+    RTEXT           "Number of Rows",IDC_STATIC,11,96,68,10
+    EDITTEXT        IDC_EDIT_NUM_OF_ROWS,83,94,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Number of Columns",IDC_STATIC,9,112,70,10
+    EDITTEXT        IDC_EDIT_NUM_OF_COLS,83,110,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Data Pointer Length",IDC_STATIC,10,35,69,10
+    COMBOBOX        IDC_COMBO_DATA_LEN,83,34,45,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,14,142,114,1
+    RTEXT           "Data Offset in File",IDC_STATIC,9,162,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET_IN_FILE,83,160,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Data Offset",IDC_STATIC,9,80,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET,83,78,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Save",IDC_BUTTON_SAVE_DESCRIPTOR,83,126,45,14
+    PUSHBUTTON      "Import Data",IDC_BUTTON_IMPORT_DATA,9,183,45,14
+    EDITTEXT        IDC_EDIT_MIN_VAL,83,46,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Min Value",IDC_STATIC,10,48,69,10
+    EDITTEXT        IDC_EDIT_MAX_VAL,83,62,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Max Value",IDC_STATIC,10,64,69,10
+END
+
+IDD_DLG_DUMMY DIALOGEX 0, 0, 355, 170
+STYLE DS_SETFONT | DS_MODALFRAME | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Dymanic Menu"
+FONT 12, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+END
+
+IDD_DLG_GRAPH_2D DIALOGEX 0, 0, 466, 224
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 10, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    LTEXT           "2D Graph",IDC_STATIC,8,7,64,8
+    PUSHBUTTON      "Load",IDC_BUTTON_LOAD,83,178,45,14
+    CONTROL         "",IDC_STATIC_PLACEHOLDER_DLG,"Static",SS_WHITEFRAME,133,7,250,210
+    RTEXT           "Number of X Points",IDC_STATIC,11,96,68,10
+    EDITTEXT        IDC_EDIT_NUM_OF_X,83,94,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Number of Y Points",IDC_STATIC,9,112,70,10
+    EDITTEXT        IDC_EDIT_NUM_OF_Y,83,110,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Data Pointer Length",IDC_STATIC,10,35,69,10
+    COMBOBOX        IDC_COMBO_DATA_LEN,83,34,45,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,14,142,114,1
+    RTEXT           "Data Offset in File",IDC_STATIC,9,162,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET_IN_FILE,83,160,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Data Offset",IDC_STATIC,9,80,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET,83,78,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_LIST_DATA2,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,133,7,324,210
+    PUSHBUTTON      "Load from clipboard",IDC_BUTTON_LOAD_FROM_CLIPBOARD,83,196,45,20,BS_MULTILINE
+    PUSHBUTTON      "Save",IDC_BUTTON_SAVE_DESCRIPTOR2,83,126,45,14
+    EDITTEXT        IDC_EDIT_MIN_VAL,83,46,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Min Value",IDC_STATIC,10,48,69,10
+    EDITTEXT        IDC_EDIT_MAX_VAL,83,62,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Max Value",IDC_STATIC,10,64,69,10
+END
+
+IDD_DLG_GRAPH_3D DIALOGEX 0, 0, 466, 224
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 10, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    LTEXT           "3D Graph",IDC_STATIC,8,7,64,8
+    CONTROL         "",IDC_STATIC_PLACEHOLDER_DLG,"Static",SS_WHITEFRAME,9,182,35,35
+    PUSHBUTTON      "Load",IDC_BUTTON_LOAD,86,184,45,14
+    CONTROL         "",IDC_LIST_DATA,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,137,11,324,210
+    PUSHBUTTON      "Load from clipboard",IDC_BUTTON_LOAD_FROM_CLIPBOARD,86,200,45,20,BS_MULTILINE
+    RTEXT           "Number of Rows",IDC_STATIC,15,99,68,10
+    EDITTEXT        IDC_EDIT_NUM_OF_ROWS,87,97,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Number of Columns",IDC_STATIC,13,115,70,10
+    EDITTEXT        IDC_EDIT_NUM_OF_COLS,87,113,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Data Pointer Length",IDC_STATIC,14,39,69,10
+    COMBOBOX        IDC_COMBO_DATA_LEN,87,38,45,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,18,145,114,1
+    RTEXT           "Data Offset in File",IDC_STATIC,13,166,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET_IN_FILE,87,164,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Data Offset",IDC_STATIC,13,83,70,10
+    EDITTEXT        IDC_EDIT_DATA_OFFSET,87,81,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_MIN_VAL,87,49,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Min Value",IDC_STATIC,14,51,69,10
+    EDITTEXT        IDC_EDIT_MAX_VAL,87,65,45,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Max Value",IDC_STATIC,14,67,69,10
+    PUSHBUTTON      "Save",IDC_BUTTON_SAVE_DESCRIPTOR,87,129,45,14
+END
+
+IDD_DLGDATA1DGRAPH DIALOG  0, 0, 320, 200
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,209,179,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,263,179,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DLG_MAIN, DIALOG
+    BEGIN
+        , 69, 7
+        , 71, 504
+    END
+
+    IDD_DLG_PARAMS_BUILDER, DIALOG
+    BEGIN
+        , 69, 7
+        , 71, 296
+    END
+
+    IDD_DLG_GRAPH_1D_BUILDER, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        , 69, 7
+        , 71, 459
+    END
+
+    IDD_DLG_TBL, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        , 69, 7
+        , 71, 457
+    END
+
+    IDD_DLG_DUMMY, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        , 69, 7
+        , 71, 348
+    END
+
+    IDD_DLG_GRAPH_2D, DIALOG
+    BEGIN
+        , 69, 7
+        , 71, 459
+    END
+
+    IDD_DLG_GRAPH_3D, DIALOG
+    BEGIN
+        , 71, 459
+    END
+
+    IDD_DLGDATA1DGRAPH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DLG_TBL DLGINIT
+BEGIN
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x2038, 0x6962, 0x0074, 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3631, 0x6220, 0x7469, "\000" 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3233, 0x6220, 0x7469, "\000" 
+    0
+END
+
+IDD_DLG_GRAPH_1D_BUILDER DLGINIT
+BEGIN
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x2038, 0x6962, 0x0074, 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3631, 0x6220, 0x7469, "\000" 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3233, 0x6220, 0x7469, "\000" 
+    0
+END
+
+IDD_DLG_GRAPH_2D DLGINIT
+BEGIN
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x2038, 0x6962, 0x0074, 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3631, 0x6220, 0x7469, "\000" 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3233, 0x6220, 0x7469, "\000" 
+    0
+END
+
+IDD_DLG_GRAPH_3D DLGINIT
+BEGIN
+    IDC_COMBO_DATA_LEN, 0x403, 6, 0
+0x2038, 0x6962, 0x0074, 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3631, 0x6220, 0x7469, "\000" 
+    IDC_COMBO_DATA_LEN, 0x403, 7, 0
+0x3233, 0x6220, 0x7469, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "DymanicMenu.exe"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "OriginalFilename", "DymanicMenu.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\DymanicMenu.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
