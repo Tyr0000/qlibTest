@@ -5,15 +5,29 @@
 #include "DlgData.h"
 #include "FListCtrl.h"
 
+typedef enum
+{
+	FVT_UNDEFINED,
+	FVT_VAL_SCALAR_8,
+	FVT_VAL_SCALAR_16,
+	FVT_VAL_SCALAR_32,
+	FVT_VAL_BITS,
+}
+FIELD_VAL_TYPE;
+
 typedef struct _PARAM_DATA
 {
 	MENU_STR Name;
-	int Type;
+	MENU_STR Units;
+	FIELD_VAL_TYPE Type;
+//	int NumOfBits;
 	int Offset;
-	int Multiplier;
-	int Addition;
-	int MinValue;
-	int MaxValue;
+	float Multiplier;
+	float Addition;
+	float MinValue;
+	float MaxValue;
+	int NumOfDecimalPlaces;
+	MENU_STR BitStrList[16];
 }
 PARAM_DATA;
 
@@ -35,6 +49,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	char m_Title[MAX_CAPTION_LEN];
 	std::vector<PARAM_DATA> ListParams;
 	void SaveDataDescriptor(FILE *F);
 	void LoadDataDescriptor(FILE *F);
@@ -54,4 +69,5 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButtonTest();
 	afx_msg void OnBnClickedButtonDelField();
+	afx_msg void OnBnClickedButtonImport();
 };

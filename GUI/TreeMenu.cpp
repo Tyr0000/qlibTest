@@ -7,6 +7,7 @@
 #include "DlgParams.h"
 #include "DlgTblBuilder.h"
 #include "DlgGraph3DBuilder.h"
+#include "DataDescriptorImport.h"
 
 #pragma warning (disable: 4996)
 
@@ -585,6 +586,262 @@ void CTreeMenu::LoadItems(char *FN, char *pMenuTitle)
 //	m_ItemList.clear();
 	Expand(hRootItem, TVE_EXPAND);
 	::SetWindowTextA(m_hWndMenuName, pMenuTitle);
+}
+
+void CTreeMenu::Import(TCHAR *pFN)
+{
+	MENU_ITEM_DATA ItemData= {0};
+	long l, i= 0;
+	char *pSym, *pItemStr, *pData, *pValStr, *pVal;
+	FILE *F;
+ 
+#ifdef _UNICODE	
+	F= _wfopen(pFN, L"rb");
+#else
+	F= fopen(pFN, "rb");
+#endif	
+ fseek(F, 0, SEEK_END);
+ l= ftell(F);
+ fseek(F, 0, SEEK_SET);
+ pData= (char *)malloc(l+ 1);
+ fread(pData, 1, l, F);
+ pData[l]= 0;
+ 
+	bool IsEOL= false;
+	bool IsComment= false;
+	bool IsFound= false;
+	HTREEITEM hRootItem= NULL, hItem;
+    CDlgParamsBuilder *pDlgParams= NULL;
+    PARAM_DATA ParamData= {0};
+    CDlgTblBuilder *pDlgTbl= NULL;
+ 
+	char *pTableEditor= NULL;
+	char *pUserDefined= NULL;
+	char *pCurveEditor= NULL;
+	char *pConstants= NULL;
+	char *pMenu= NULL;
+	pTableEditor= strstr(pData, "[TableEditor]");
+	pUserDefined= strstr(pData, "[UserDefined]");
+	pCurveEditor= strstr(pData, "[CurveEditor]");
+	pConstants=		strstr(pData, "[Constants]");
+	pMenu= strstr(pData, "[Menu]");
+	pSym= pMenu;
+	if (pSym == NULL)
+		goto L_EXIT;
+        
+        
+	m_ItemList.clear();    
+#define pStr pSym
+// find menu items
+	do
+	{
+		GOTO_NEXT_LINE(pSym)
+		if (strncmp(pSym, "subMenu", 7) == 0)
+		{
+			SKIP_TAG(pSym, 7)
+			GET_VAL(pSym)
+			GET_STR_VAL(pSym)
+			if (pValStr == NULL)
+					continue;
+			hItem= InsertItem(pValStr, hRootItem);
+			ItemData.hItem= hItem;
+			ItemData.pDlg= (CDlgData *)pVal;
+			m_ItemList.push_back(ItemData);
+//           SetItemData(hItem, (DWORD_PTR)pVal);
+		}
+		else
+			if (strncmp(pSym, "menu", 4) == 0)
+				{
+						SKIP_TAG(pSym, 7)
+						GET_STR_VAL(pSym)
+						hRootItem= InsertItem(pValStr, TVI_ROOT);
+					}
+					else 
+						break;        
+	}
+	while (*pSym != 0);   
+//    goto L_EXIT;
+// find param dialog items   
+
+	l= m_ItemList.size();
+//	pSym= strstr(pData, "[UserDefined]");
+	if (pUserDefined != NULL) 
+	{
+		pSym= pUserDefined;
+	do
+	{
+		GOTO_NEXT_LINE(pSym)
+		if (strncmp(pSym, "dialog", 6) == 0)
+		{
+			pDlgParams= NULL;
+			SKIP_TAG(pSym, 7)
+			GET_VAL(pSym)
+			GET_STR_VAL(pSym)
+			for (i= 0; i < l; i++)
+			{
+//				pValStr= (char *)m_ItemList[i].pDlg;
+				if (strcmp(pVal, (char *)m_ItemList[i].pDlg) == 0)
+				{
+					pDlgParams= new CDlgParamsBuilder;
+					strcpy(pDlgParams->m_Title, pValStr);
+					SetItemData(m_ItemList[i].hItem, (DWORD_PTR)pDlgParams);
+					break;
+				}
+			}
+		}
+		else
+			if (strncmp(pSym, "field", 5) == 0)
+			{
+			    memset(&ParamData, 0, sizeof(PARAM_DATA));
+				SKIP_TAG(pSym, 5)
+				GET_STR_VAL(pSym)
+				SKIP_WHITE_SPACE(pSym)
+				GET_VAL(pSym)
+				if (pValStr != NULL)
+					strcpy(ParamData.Name, pValStr);
+				if (pVal == NULL)
+					ParamData.Type= FVT_UNDEFINED;
+				else
+				{
+//					pItemStr= strstr(pConstants, pVal);
+					FIND_SUB_STR(pConstants, pMenu, pVal, strlen(pVal), pItemStr)
+					if ((pItemStr != NULL) && (pItemStr < pMenu))
+					{
+						SKIP_TAG(pItemStr, strlen(pVal))
+//						SKIP_WHITE_SPACE(pItemStr)
+						GET_VAL(pItemStr)
+						if (pVal != NULL)
+						{
+							if (strcmp(pVal, "scalar") == 0)
+							{
+								GET_VAL(pItemStr)
+								if (*pVal == 'U')
+								{
+								if (strcmp(ParamData.Name, "MAP Sensor Offset") == 0)
+									MessageBeep(0);
+									*(WORD *)(pVal+ 1)-= 0x3030;
+									ParamData.Type= (FIELD_VAL_TYPE)(*(pVal+ 1)* 10+ *(pVal+ 2));
+									GET_NUM_VAL(pItemStr)
+									ParamData.Offset= atol(pVal);
+									GET_STR_VAL(pItemStr)
+									if (pValStr != NULL)
+										strcpy(ParamData.Units, pValStr);
+									GET_NUM_VAL(pItemStr)
+									ParamData.Multiplier= atof(pVal);
+									GET_NUM_VAL(pItemStr)
+									if (pVal != NULL)
+										ParamData.Addition= atof(pVal);
+									GET_NUM_VAL(pItemStr)
+									ParamData.MinValue= atof(pVal);
+									GET_NUM_VAL(pItemStr)
+									ParamData.MaxValue= atof(pVal);
+									GET_NUM_VAL(pItemStr)
+									ParamData.NumOfDecimalPlaces= atoi(pVal);
+								}
+							}
+							else
+								if (strcmp(pVal, "bits") == 0)
+								{
+									ParamData.Type= FVT_VAL_BITS;
+									GET_VAL(pItemStr)
+									if (*pVal == 'U')
+									{
+										*(WORD *)(pVal+ 1)-= 0x3030;
+										ParamData.Type= (FIELD_VAL_TYPE)(*(pVal+ 1)* 10+ *(pVal+ 2));
+										GET_NUM_VAL(pItemStr)
+										ParamData.Offset= atol(pVal);
+//				                        GET_VAL(pItemStr)
+										SKIP_WHITE_SPACE(pItemStr)
+										if (*pItemStr == '[')
+										{
+											pItemStr++;
+											GET_NUM_VAL(pItemStr)
+											ParamData.MinValue= atoi(pVal);
+											GET_NUM_VAL(pItemStr)
+											ParamData.MaxValue= atoi(pVal);
+											for (i= 0; i < 16; i++)
+											{
+												GET_STR_VAL(pItemStr)
+												if (pValStr == NULL)
+												break;
+												strcpy(ParamData.BitStrList[i], pValStr);				                            }
+											}
+								   }
+								}
+						}
+					}
+				}
+				if (pDlgParams != NULL)
+					pDlgParams->ListParams.push_back(ParamData);
+			}
+			else break;
+	}
+	while (*pSym != 0);   
+	} 
+// tables
+
+//	pSym= strstr(pData, "[TableEditor]");
+	if (pTableEditor != NULL) 
+	{
+		pSym= pTableEditor;
+	do
+	{
+		GOTO_NEXT_LINE(pSym)
+		if (strncmp(pSym, "table", 5) == 0)
+		{
+			pDlgTbl= NULL;
+			SKIP_TAG(pSym, 7)
+			GET_VAL(pSym)
+			SKIP_UNTIL_SYM(pSym, '"')
+			GET_STR_VAL(pSym)
+			for (i= 0; i < l; i++)
+			{
+//				pValStr= (char *)m_ItemList[i].pDlg;
+				if (strcmp(pVal, (char *)m_ItemList[i].pDlg) == 0)
+				{
+					pDlgTbl= new CDlgTblBuilder; 
+					strcpy(pDlgTbl->m_Title, pValStr);
+					SetItemData(m_ItemList[i].hItem, (DWORD_PTR)pDlgTbl);
+					break;
+				}
+			}
+		}
+	}		
+	while (*pSym != 0);    
+	}
+//	pSym= strstr(pData, "[CurveEditor]");
+	if (pCurveEditor != NULL) 
+	{
+		pSym= pCurveEditor;
+	do
+	{
+		GOTO_NEXT_LINE(pSym)
+		if (strncmp(pSym, "curve", 5) == 0)
+		{
+			pDlgTbl= NULL;
+			SKIP_TAG(pSym, 7)
+			GET_VAL(pSym)
+			SKIP_UNTIL_SYM(pSym, '"')
+			GET_STR_VAL(pSym)
+			for (i= 0; i < l; i++)
+			{
+//				pValStr= (char *)m_ItemList[i].pDlg;
+				if (strcmp(pVal, (char *)m_ItemList[i].pDlg) == 0)
+				{
+					pDlgTbl= new CDlgTblBuilder; 
+					strcpy(pDlgTbl->m_Title, pValStr);
+					SetItemData(m_ItemList[i].hItem, (DWORD_PTR)pDlgTbl);
+					break;
+				}
+			}
+		}
+	}		
+	while (*pSym != 0);    
+	}
+L_EXIT:
+ //   GlobalUnlock(hClBrData); 
+ //   CloseClipboard();
+    free(pData);
 }
 
 void CTreeMenu::LoadData(char *FN)

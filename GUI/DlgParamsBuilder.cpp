@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "DlgParamsBuilder.h"
 #include "DlgParams.h"
+#include "DataDescriptorImport.h"
 
 #pragma warning (disable: 4996)
 
@@ -35,6 +36,7 @@ BEGIN_MESSAGE_MAP(CDlgParamsBuilder, CDlgData)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_FIELD, &CDlgParamsBuilder::OnBnClickedButtonAddField)
 	ON_BN_CLICKED(IDC_BUTTON_TEST, &CDlgParamsBuilder::OnBnClickedButtonTest)
 	ON_BN_CLICKED(IDC_BUTTON_DEL_FIELD, &CDlgParamsBuilder::OnBnClickedButtonDelField)
+	ON_BN_CLICKED(IDC_BUTTON_IMPORT, &CDlgParamsBuilder::OnBnClickedButtonImport)
 END_MESSAGE_MAP()
 
 
@@ -43,12 +45,15 @@ END_MESSAGE_MAP()
 typedef enum
 {
 	CI_NAME= 0,
-	CI_TYPE,
+	CI_UNITS,
+	CI_VAL_TYPE,
 	CI_OFFSET,
 	CI_MULTIPLIER,
 	CI_ADDITION,
 	CI_MIN_VAL,
-	CI_MAX_VAL
+	CI_MAX_VAL,
+	CI_NUM_OF_DECIMAL_PLACES
+	
 }
 COLUMN_IND;
 
@@ -60,6 +65,8 @@ BOOL CDlgParamsBuilder::OnInitDialog()
 	int i, l;  
 	
 	// TODO:  Add extra initialization here
+	SetDlgItemTextA(IDC_EDIT_TITLE, m_Title);
+	
 	m_ListParameters.SetExtendedStyle(LVS_EX_GRIDLINES);  
 	int iControlEdit= m_ListParameters.AddControl(FL_EDIT);						//0
 	int iControlFL_COMBOBOX= m_ListParameters.AddControl(FL_COMBOBOX);					//1
@@ -71,13 +78,15 @@ BOOL CDlgParamsBuilder::OnInitDialog()
 	m_ListParameters.AddControlComboItem(iControlFL_COMBOBOX, "32 bit");
 	
 //	m_ListParameters.InsertFColumn(0, "", 50, FL_LEFT, iControlEdit);
-	m_ListParameters.InsertFColumn(CI_NAME, "Name", 250, FL_LEFT, iControlEdit);
-	m_ListParameters.InsertFColumn(CI_TYPE, "Type", 120, FL_LEFT, iControlFL_COMBOBOX);
+	m_ListParameters.InsertFColumn(CI_NAME, "Name", 350, FL_LEFT, iControlEdit);
+	m_ListParameters.InsertFColumn(CI_UNITS, "Units", 250, FL_LEFT, iControlEdit);
+	m_ListParameters.InsertFColumn(CI_VAL_TYPE, "Type", 120, FL_LEFT, iControlFL_COMBOBOX);
 	m_ListParameters.InsertFColumn(CI_OFFSET, "Offset", 120, FL_LEFT, iControlEdit);
 	m_ListParameters.InsertFColumn(CI_MULTIPLIER, "Multiplier", 130, FL_LEFT, iControlEdit);
 	m_ListParameters.InsertFColumn(CI_ADDITION, "Addition", 120, FL_LEFT, iControlEdit);
 	m_ListParameters.InsertFColumn(CI_MIN_VAL, "Min Value", 150, FL_LEFT, iControlEdit);
 	m_ListParameters.InsertFColumn(CI_MAX_VAL, "Max Value", 150, FL_LEFT, iControlEdit);
+	m_ListParameters.InsertFColumn(CI_NUM_OF_DECIMAL_PLACES, "Num of decimal places", 150, FL_LEFT, iControlEdit);
 
 	for (i= 0; i < 15; i++)
 	{
@@ -94,7 +103,7 @@ BOOL CDlgParamsBuilder::OnInitDialog()
 		if (hFRow == NULL)
 			hFRow= m_ListParameters.InsertFRow(FL_ROOT, FL_LAST, "");
 		m_ListParameters.SetFItemText(hFRow, CI_NAME,  ListParams[i].Name);
-		m_ListParameters.SetFItenValText(hFRow, CI_TYPE, ListParams[i].Type* 8, _T(" bit"));
+		m_ListParameters.SetFItenValText(hFRow, CI_VAL_TYPE, ListParams[i].Type* 8, _T(" bit"));
 		m_ListParameters.SetFItemVal(hFRow, CI_OFFSET, ListParams[i].Offset);
 		m_ListParameters.SetFItemVal(hFRow, CI_MULTIPLIER, ListParams[i].Multiplier);
 		m_ListParameters.SetFItemVal(hFRow, CI_ADDITION, ListParams[i].Addition);
@@ -145,7 +154,8 @@ void CDlgParamsBuilder::SaveDataDescriptor(FILE *F)
 		if ((pItemName == NULL) || (pItemName == "") || (pItemName[0] == 0))
 			continue;
 		strcpy(ParamData.Name, pItemName);
-		ParamData.Type= m_ListParameters.GetFItemVal(hFRow,       CI_TYPE);
+		strcpy(ParamData.Units, m_ListParameters.GetFItemText(hFRow, CI_UNITS));
+//		ParamData.Type= m_ListParameters.GetFItemVal(hFRow,       CI_VAL_TYPE);
 		ParamData.Offset=			m_ListParameters.GetFItemVal(hFRow, CI_OFFSET);  //_tstoi(m_ListParameters.GetFItemText(hFRow, 2));
 		ParamData.Multiplier= m_ListParameters.GetFItemVal(hFRow, CI_MULTIPLIER);
 		ParamData.Addition=   m_ListParameters.GetFItemVal(hFRow, CI_ADDITION); 
@@ -197,8 +207,8 @@ void CDlgParamsBuilder::vSaveDataDescriptor(FILE *F)
 		if ((pItemName == NULL) || (pItemName == "") || (pItemName[0] == 0))
 			continue;
 		strcpy(ParamData.Name, pItemName);
-		ParamData.Type= m_ListParameters.GetFItemVal(hFRow,       CI_TYPE);
-		ParamData.Type/= 8;
+//		ParamData.Type= m_ListParameters.GetFItemVal(hFRow,       CI_VAL_TYPE);
+//		ParamData.Type/= 8;
 		ParamData.Offset=			m_ListParameters.GetFItemVal(hFRow, CI_OFFSET);  //_tstoi(m_ListParameters.GetFItemText(hFRow, 2));
 		ParamData.Multiplier= m_ListParameters.GetFItemVal(hFRow, CI_MULTIPLIER);
 		ParamData.Addition=   m_ListParameters.GetFItemVal(hFRow, CI_ADDITION); 
@@ -295,4 +305,62 @@ void CDlgParamsBuilder::OnBnClickedButtonDelField()
 		m_ListParameters.SetFItemVal(hFRow, 0,  i+ 1);
 	}
 */
+}
+
+char TestParams[]=
+"dialog = speed_settings,   \"Speed Sensors\"\r\n\
+   field = \"#Crankshaft Speed Settings\"\r\n\
+       field = \"Tooth Count\", trigg1_cnt\r\n\
+       field = \"Pulse divider\", trigg1_div\r\n\
+       field = \"Missing Tooth Wheel\", trigger_conf_missing\r\n\
+   field = \"#Driven Wheel Speed Sensor Settings\"";
+
+void CDlgParamsBuilder::OnBnClickedButtonImport()
+{
+	char ImportData[2048];
+	
+	SetDlgItemText(IDC_EDIT_IMPORT, TestParams);
+	GetDlgItemText(IDC_EDIT_IMPORT, ImportData, 2048);
+	char *pSym= ImportData;
+	char *pValStr;
+	bool IsEOL= false;
+	PARAM_DATA ParamData= {0};
+
+	if (strstr(pSym, "dialog") == NULL) return;
+	SKIP_UNTIL_SYM(pSym, '"')
+	pSym++;    
+	pValStr= pSym;
+	SKIP_UNTIL_SYM(pSym, '"')
+	*pSym= 0;
+	pSym++;    
+	SetDlgItemText(IDC_EDIT_TITLE, pValStr);
+
+	while (*pSym != 0)
+	{
+		pSym= strstr(pSym, "field");
+		if (pSym == 0)
+			break;
+		{
+			SKIP_UNTIL_SYM(pSym, '"')
+			if (pSym == NULL)
+					return;
+			pSym++;    
+			pValStr= pSym;
+			SKIP_UNTIL_SYM(pSym, '"')
+			pSym++; 
+			*pSym= 0;
+			SKIP_UNTIL_SYM(pSym, '"')
+			pSym++; 
+			strcpy(ParamData.Name, pValStr);
+			SKIP_WHITE_SPACE(pSym)
+			if (!IsEOL)
+			{ }
+			ListParams.push_back(ParamData);	
+			HFROW hFRow;
+			hFRow= m_ListParameters.InsertFRow(FL_ROOT, FL_LAST, "");
+			m_ListParameters.SetFItemText(hFRow, CI_NAME,  pValStr);
+		//	l= m_ListParameters.GetFRowCount();
+		//	m_ListParameters.SetFItemVal(hFRow, 0, l);
+		}
+	}
 }

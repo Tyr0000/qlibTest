@@ -20,6 +20,7 @@
 #define IDD_DLG_GRAPH_2D                139
 #define IDD_DLG_GRAPH_3D                140
 #define IDD_DLG_TBL                     141
+#define IDD_DLG_DATA_2D                 142
 #define IDC_TREE_MENU_BUILDER           1000
 #define IDC_BUTTON_ADD_MENU_ITEM        1001
 #define IDC_BUTTON_DEL_MENU_ITEM        1002
@@ -67,20 +68,35 @@
 #define IDC_BUTTON_SAVE_DESCRIPTOR      1041
 #define IDC_EDIT_NUM_OF_X               1042
 #define IDC_BUTTON_IMPORT_DATA          1043
+#define IDC_EDIT_NUM_OF_POINTS          1043
 #define IDC_EDIT_NUM_OF_Y               1044
 #define IDC_BUTTON_LOAD_EXT_MENU        1045
 #define IDC_BUTTON_LOAD_FROM_CLIPBOARD  1046
 #define IDC_BUTTON_TEST                 1047
 #define IDC_BUTTON_SAVE_DESCRIPTOR2     1048
+#define IDC_BUTTON_IMPORT               1048
 #define IDC_BUTTON_IMPORT_ITEM_DATA2    1049
+#define IDC_EDIT_IMPORT                 1050
+#define IDC_EDIT_TITLE                  1051
+#define IDC_BUTTON_IMPORT_MENU          1052
+#define IDC_STATIC_TITLE                1053
+#define IDC_EDIT_X_DATA_OFFSET          1054
+#define IDC_EDIT_Y_DATA_OFFSET          1055
+#define IDC_EDIT_X_AXIS                 1056
+#define IDC_EDIT_NUM_Y_AXIS             1057
+#define IDC_EDIT_X_MIN_VAL              1058
+#define IDC_EDIT_X_MAX_VAL              1059
+#define IDC_EDIT_X_MIN_VAL2             1060
+#define IDC_EDIT_Y_MIN_VAL2             1060
+#define IDC_EDIT_Y_MAX_VAL2             1061
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        143
+#define _APS_NEXT_RESOURCE_VALUE        144
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1050
+#define _APS_NEXT_CONTROL_VALUE         1060
 #define _APS_NEXT_SYMED_VALUE           111
 #endif
 #endif

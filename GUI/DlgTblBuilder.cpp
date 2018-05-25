@@ -33,7 +33,7 @@ CDlgTblBuilder::~CDlgTblBuilder()
 void CDlgTblBuilder::DoDataExchange(CDataExchange* pDX)
 {
 	CDlgData::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST_DATA, m_TblData);
+//	DDX_Control(pDX, IDC_LIST_DATA, m_TblData);
 }
 
 
@@ -56,7 +56,8 @@ BOOL CDlgTblBuilder::OnInitDialog()
 //	m_TblData.InsertColumn(0, "X", LVCFMT_CENTER, 100);
 //	m_TblData.InsertColumn(1, "Y", LVCFMT_CENTER, 100);
 	
-	FillTbl();
+		SetDlgItemTextA(IDC_EDIT_TITLE, m_Title);
+//	FillTbl();
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

@@ -93,7 +93,7 @@ int i;
 
 TCHAR *SelectFileToOpen(HWND hOwnerWnd, TCHAR *DlgTitle, TCHAR *FileExts, TCHAR **ppShortFN)
 {
-OPENFILENAMEA OSrcFNInfo;
+OPENFILENAME OSrcFNInfo;
 DWORD ErrCode;
 int i;
 
@@ -177,5 +177,6 @@ int i;
 		else
 			return NULL; // strange
 	}
+	return FN;
 }
 

@@ -99,6 +99,7 @@ public:
 	void LoadSubItems(char *FN);
 	void LoadItems(char *FN, char *pMenuTitle);
 	void LoadData(char *FN);
+	void Import(TCHAR *pFN);
 	virtual BOOL DestroyWindow();
 	void ShowDlg();
 	void HideDlg();

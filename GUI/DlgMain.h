@@ -69,4 +69,5 @@ public:
 	afx_msg void OnBnClickedButtonImportItemData();
 	afx_msg void OnBnClickedButtonExportItem();
 	afx_msg void OnBnClickedButtonImportItemData2();
+	afx_msg void OnBnClickedButtonImportMenu();
 };

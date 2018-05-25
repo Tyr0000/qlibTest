@@ -106,6 +106,7 @@ BEGIN_MESSAGE_MAP(CDlgMain, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_IMPORT_ITEM_DATA, &CDlgMain::OnBnClickedButtonImportItemData)
 	ON_BN_CLICKED(IDC_BUTTON_EXPORT_ITEM, &CDlgMain::OnBnClickedButtonExportItem)
 	ON_BN_CLICKED(IDC_BUTTON_IMPORT_ITEM_DATA2, &CDlgMain::OnBnClickedButtonImportItemData2)
+	ON_BN_CLICKED(IDC_BUTTON_IMPORT_MENU, &CDlgMain::OnBnClickedButtonImportMenu)
 END_MESSAGE_MAP()
 
 
@@ -141,6 +142,7 @@ BOOL CDlgMain::OnInitDialog()
 	m_TstMenu.m_MenuType= MT_WORK;
 	m_TreeMenu.m_hWndMenuName= GetDlgItem(IDC_STATIC_MENU_NAME)->m_hWnd;
 	
+	m_TreeMenu.Import("D:\\Prj\\_Freelance\\Acer\\DymanicMenu\\Tst\\Acer.ini");
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -640,9 +642,6 @@ void CDlgMain::OnBnClickedButtonLoadMenu()
 	if (pFN == NULL)
 		return;
 	
-	if (pFN == NULL)
-		return;
-		
 	ItemTypeCnanged= false; 
 	DataSaved= false;
 	MenuItemsSaved= false;
@@ -906,4 +905,20 @@ void CDlgMain::OnBnClickedButtonExportItem()
 void CDlgMain::OnBnClickedButtonImportItemData2()
 {
 	// TODO: Add your control notification handler code here
+}
+
+void CDlgMain::OnBnClickedButtonImportMenu()
+{
+	TCHAR *pFN;
+	
+/*	
+	m_TreeMenu.Import("D:\\Prj\\_Freelance\\Acer\\DymanicMenu\\Tst\\Acer.ini");
+	return;
+*/	
+	pFN= SelectFileToOpen(m_hWnd, "Select a menu file", "menu items files\0*.ini\0\0", NULL);
+	if (pFN == NULL)
+		return;
+		
+	m_TreeMenu.Import(pFN);	
+	
 }

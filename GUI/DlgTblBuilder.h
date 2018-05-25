@@ -14,7 +14,8 @@ public:
 	virtual ~CDlgTblBuilder();
 
 // Dialog Data
-	enum { IDD = IDD_DLG_TBL_BUILDER };
+//	enum { IDD = IDD_DLG_TBL_BUILDER };
+	enum { IDD = IDD_DLG_DATA_2D};
 
 protected:
 //	DATA_LENGTH_TYPE m_DataLengthType;
@@ -28,6 +29,11 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	char m_Title[MAX_CAPTION_LEN];
+	char m_AxisX[MAX_CAPTION_LEN];
+	char m_AxisY[MAX_CAPTION_LEN];
+	
+
 	afx_msg void OnBnClickedButtonLoad();
 	afx_msg void OnCbnSelchangeComboDataLen();
 	virtual BOOL OnInitDialog();
